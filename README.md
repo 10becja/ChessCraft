@@ -17,3 +17,6 @@ ChessCraft includes an unmodified copy of the following third-party project:
 ChessCraft also uses (via a shaded Maven dependency): 
 
 * [Chesspresso](http://www.chesspresso.org/) 
+
+------------------------------------
+[ChessCraft Download](https://github.com/10becja/MinecraftPlugins/tree/master/ChessCraft)
