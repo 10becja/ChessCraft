@@ -2,10 +2,13 @@ package me.desht.chesscraft.commands;
 
 import chesspresso.Chess;
 import me.desht.chesscraft.Messages;
+import me.desht.chesscraft.chess.BoardView;
+import me.desht.chesscraft.chess.BoardViewManager;
 import me.desht.chesscraft.chess.ChessGame;
 import me.desht.chesscraft.chess.ChessGameManager;
 import me.desht.chesscraft.exceptions.ChessException;
 import me.desht.dhutils.MiscUtil;
+
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -28,11 +31,12 @@ public class CreateGameCommand extends ChessAbstractCommand {
 
 		int colour = getBooleanOption("black") ? Chess.BLACK : Chess.WHITE;
 		ChessGame game = ChessGameManager.getManager().createGame((Player) sender, gameName, boardName, colour);
-//		if (plugin.getConfig().getBoolean("auto_teleport_on_join")) {
-//			game.getPlayer(colour).teleport();
-//		} else {
-//			MiscUtil.statusMessage(sender, Messages.getString("ChessCommandExecutor.canTeleport", game.getName())); //$NON-NLS-1$
-//		}
+		if (plugin.getConfig().getBoolean("auto_teleport_on_join")) {
+			BoardView bv = BoardViewManager.getManager().findBoardForGame(game);
+			game.getPlayer(colour).teleport(bv);
+		} else {
+			MiscUtil.statusMessage(sender, Messages.getString("ChessCommandExecutor.canTeleport", game.getName()));
+		}
 
 		return true;
 	}

@@ -177,7 +177,8 @@ public class ChessPersistence {
 				LogUtils.info("migrated v4-format game save " + f.getName() + " to v5-format");
 			}
 			if (game != null) {
-				ChessGameManager.getManager().registerGame(game);
+				BoardView bv = BoardViewManager.getManager().findBoardForGame(game);
+				ChessGameManager.getManager().registerGame(game, bv);
 			}
 			return game;
 		} catch (Exception e) {

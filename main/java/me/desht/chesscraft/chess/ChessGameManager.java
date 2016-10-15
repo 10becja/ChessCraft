@@ -41,10 +41,11 @@ public class ChessGameManager {
 	}
 
 
-	public void registerGame(ChessGame game) {
+	public void registerGame(ChessGame game, BoardView bv) {
 		String gameName = game.getName();
 		if (!chessGames.containsKey(gameName)) {
 			chessGames.put(gameName, game);
+	        bv.setGame(game);
             game.save();
             Bukkit.getPluginManager().callEvent(new ChessGameCreatedEvent(game));
         } else {
@@ -204,7 +205,7 @@ public class ChessGameManager {
 		} else {
 			bv = BoardViewManager.getManager().getBoardView(boardName);
 		}
-
+		
 		return createGame(player, gameName, bv, colour);
 	}
 
@@ -225,8 +226,7 @@ public class ChessGameManager {
 
         String tcSpec = bv.getControlPanel().getTcDefs().currentDef().getSpec();
 		ChessGame game = new ChessGame(gameName, player, tcSpec, colour);
-        registerGame(game);
-        bv.setGame(game);
+        registerGame(game, bv);
 		setCurrentGame(player, game);
 
 		MiscUtil.statusMessage(player, Messages.getString("ChessCommandExecutor.gameCreated", game.getName(), bv.getName()));
