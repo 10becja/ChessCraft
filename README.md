@@ -1,3 +1,5 @@
+PLEASE NOTE: I am no longer actively updating this plugin. I've more or less moved on from Minecraft, and simply don't have time for it anymore. The last version that this code worked with is 1.10.2 I believe.
+
 # ChessCraft
 
 ChessCraft is a Bukkit plugin for playing chess on your CraftBukkit (Minecraft) server.
